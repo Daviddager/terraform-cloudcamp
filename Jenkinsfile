@@ -9,6 +9,8 @@ node('terraform') {
         stage('Terraform Init'){
             sh "terraform init"
         }
+        sh "ls -la"
+        sh "terraform version"
         stage('Prepare'){
             sh """
                 terraform fmt
