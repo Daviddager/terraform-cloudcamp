@@ -6,14 +6,14 @@ node('terraform') {
         stage('Checkout'){
         checkout scm
         }
+        stage('Terraform Init'){
+            sh "terraform init"
+        }
         stage('Prepare'){
             sh """
                 terraform fmt
                 terraform validate
                 """
-        }
-        stage('Terraform Init'){
-            sh "terraform init"
         }
         stage('Terraform plan'){
             sh "terraform plan -out=tfplan"
@@ -27,7 +27,7 @@ node('terraform') {
         err = caughtError
     }
     finally{
-        if err{
+        if (err){
             throw err
         }
     }
