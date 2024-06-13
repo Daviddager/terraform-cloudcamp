@@ -19,7 +19,7 @@ node('terraform') {
             sh "terraform plan -out=tfplan"
         }
         stage('Terraform apply'){
-            echo "Terraform apply tfplan"
+            sh 'terraform apply "tfplan"'
         }
     }
     catch(caughtError){
